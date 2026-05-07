@@ -25,7 +25,7 @@ export default function Header() {
               <span className="text-sm font-semibold text-[#004d40]">Home Care Dubai</span>
             </a>
 
-            <div className="flex items-center gap-3">
+            <div className="hidden sm:flex items-center gap-3">
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
