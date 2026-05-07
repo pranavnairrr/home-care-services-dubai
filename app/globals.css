@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #004d40;
+  --primary-hover: #00695c;
+  --whatsapp: #25D366;
+  --whatsapp-hover: #20BA5A;
+  --navy: #1a2332;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #1a2332;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-[#004d40] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#00695c] transition-colors duration-200 inline-flex items-center gap-2;
+  }
+  .btn-whatsapp {
+    @apply bg-[#25D366] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#20BA5A] transition-colors duration-200 inline-flex items-center gap-2;
+  }
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-[#004d40] text-center;
+  }
+  .section-subtitle {
+    @apply text-gray-500 text-center mt-2 text-base md:text-lg;
+  }
+  .card {
+    @apply bg-white rounded-2xl shadow-md p-6 border border-gray-100;
+  }
+}
