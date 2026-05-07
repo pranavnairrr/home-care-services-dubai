@@ -24,17 +24,18 @@ export default function CoverageAreas() {
         </div>
 
         {/* Google Maps embed */}
-        <div className="mt-8 rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
+        <div className="mt-8 rounded-2xl overflow-hidden border border-gray-100 shadow-sm relative">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d462143.03796047734!2d54.89776174648177!3d25.075580258955707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43496ad9c645%3A0xbde66e5084295162!2sDubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sae!4v1746600000000!5m2!1sen!2sae"
             width="100%"
             height="300"
             style={{ border: 0 }}
-            allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             title="AM Health Hub — Dubai coverage area"
           />
+          {/* blocks the Google "Open in Maps" overlay link */}
+          <div className="absolute inset-0" />
         </div>
 
         <div className="text-center mt-6">
