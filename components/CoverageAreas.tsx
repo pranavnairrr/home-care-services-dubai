@@ -1,8 +1,21 @@
 'use client'
 
+import { useState, useRef, useEffect } from 'react'
 import { COVERAGE_AREAS, WHATSAPP_URL } from '@/lib/data'
 
 export default function CoverageAreas() {
+  const [mapLoaded, setMapLoaded] = useState(false)
+  const mapRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setMapLoaded(true) },
+      { rootMargin: '200px' }
+    )
+    if (mapRef.current) observer.observe(mapRef.current)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section className="py-16 bg-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,18 +36,20 @@ export default function CoverageAreas() {
           ))}
         </div>
 
-        {/* Google Maps embed */}
-        <div className="mt-8 rounded-2xl overflow-hidden border border-gray-100 shadow-sm relative">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d462143.03796047734!2d54.89776174648177!3d25.075580258955707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43496ad9c645%3A0xbde66e5084295162!2sDubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sae!4v1746600000000!5m2!1sen!2sae"
-            width="100%"
-            height="300"
-            style={{ border: 0 }}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="AM Health Hub — Dubai coverage area"
-          />
-          {/* blocks the Google "Open in Maps" overlay link */}
+        {/* Google Maps embed — deferred until section is near viewport */}
+        <div ref={mapRef} className="mt-8 rounded-2xl overflow-hidden border border-gray-100 shadow-sm relative" style={{ height: 300 }}>
+          {mapLoaded ? (
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d462143.03796047734!2d54.89776174648177!3d25.075580258955707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43496ad9c645%3A0xbde66e5084295162!2sDubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sae!4v1746600000000!5m2!1sen!2sae"
+              width="100%"
+              height="300"
+              style={{ border: 0 }}
+              referrerPolicy="no-referrer-when-downgrade"
+              title="AM Health Hub — Dubai coverage area"
+            />
+          ) : (
+            <div className="w-full h-full bg-[#effcf9]" />
+          )}
           <div className="absolute inset-0" />
         </div>
 

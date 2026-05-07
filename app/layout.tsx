@@ -17,6 +17,7 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.amhealthhub.com'),
   title: 'Home Care Services in Dubai | DHA-Licensed Nurses & Caregivers',
   description:
     'Expert home care in Dubai — DHA-licensed nurses, physiotherapists & doctors at your door. Elderly care, post-surgery recovery, newborn care. Same-day booking. 500+ families served.',

@@ -7,17 +7,23 @@ export default function TestimonialsSection() {
   const [current, setCurrent] = useState(0)
   const [fade, setFade] = useState(true)
   const paused = useRef(false)
+  const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      if (paused.current) return
-      setFade(false)
-      setTimeout(() => {
-        setCurrent(c => (c + 1) % TESTIMONIALS.length)
-        setFade(true)
-      }, 300)
-    }, 5000)
-    return () => clearInterval(timer)
+    let timer: ReturnType<typeof setInterval> | undefined
+    const start = () => {
+      timer = setInterval(() => {
+        if (paused.current) return
+        setFade(false)
+        setTimeout(() => { setCurrent(c => (c + 1) % TESTIMONIALS.length); setFade(true) }, 300)
+      }, 5000)
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { start() } else { clearInterval(timer) } },
+      { threshold: 0.1 }
+    )
+    if (sectionRef.current) observer.observe(sectionRef.current)
+    return () => { observer.disconnect(); clearInterval(timer) }
   }, [])
 
   const goTo = (i: number) => {
@@ -28,7 +34,7 @@ export default function TestimonialsSection() {
   const t = TESTIMONIALS[current]
 
   return (
-    <section className="py-16 bg-[#004d40]">
+    <section ref={sectionRef} className="py-16 bg-[#004d40]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-center text-2xl md:text-3xl font-bold text-white mb-1">
           500+ Families. One Common Feeling: Relief.
