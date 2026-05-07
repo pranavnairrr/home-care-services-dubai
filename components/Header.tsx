@@ -22,7 +22,7 @@ export default function Header() {
                 priority
                 className="object-contain"
               />
-              <span className="hidden sm:block text-sm font-semibold text-[#004d40]">Home Care Dubai</span>
+              <span className="text-sm font-semibold text-[#004d40]">Home Care Dubai</span>
             </a>
 
             <div className="flex items-center gap-3">
