@@ -25,9 +25,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        inter: ['Inter', 'sans-serif'],
-        montserrat: ['Montserrat', 'sans-serif'],
-        opensans: ['"Open Sans"', 'sans-serif'],
+        inter: ['var(--font-inter)', 'sans-serif'],
+        montserrat: ['var(--font-montserrat)', 'sans-serif'],
       },
     },
   },
